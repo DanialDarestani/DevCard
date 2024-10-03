@@ -12,6 +12,7 @@ namespace DevCard___Project.Controllers
 
         public IActionResult Index()
         {
+	        var index = new IndexModel();
             return View();
         }
         public IActionResult Contact()
