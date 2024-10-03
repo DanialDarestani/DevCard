@@ -12,18 +12,85 @@ namespace DevCard___Project.Controllers
 
         public IActionResult Index()
         {
-	        var index = new IndexModel();
             return View();
         }
         public IActionResult Contact()
         {
             return View();
+            /*return PartialView("Contact");*/
         }
+        
+        
+        public ViewResult Test1()
+        {
+            return View("Components/HeaderViewComponents/_Header");
+        }
+        public PartialViewResult Test2()
+        {
+            return PartialView("Components/ArticlesViewComponents/_Article");
+        }
+        public ViewComponentResult Test3()
+        {
+            return ViewComponent("");
+        }
+        public ContentResult Test4()
+        {
+            return Content("<h1 style='color: red'>Hello</h1>");
+        }
+        public EmptyResult Test5()
+        {
+            return new EmptyResult();
+        }
+        public FileResult Test6()
+        {
+            return File("~/test.txt","text/html");
+        }
+        public JsonResult Test7()
+        {
+            return Json(new
+                {
+                    id=12, 
+                    name= "Danial", 
+                    job="Programmer"
+                }
+            );
+        }
+        public JavaScriptResult Test8()
+        {
+            return new JavaScriptResult("alert('Hello World!!')");
+        }
+
+        public RedirectResult Test9()
+        {
+            return Redirect("https://www.atriya.com");
+        }
+        public RedirectToActionResult Test10()
+        {
+            return RedirectToAction("Contact","Home");
+        }
+
+        public IActionResult Status()
+        {
+            return new StatusCodeResult(404);
+            return new NotFoundResult();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+
+    public class JavaScriptResult : ContentResult
+    {
+        public string Content { get; set; }
+        public string ContentType { get; set; } = "application/javascript";
+
+        public JavaScriptResult(string data)
+        {
+            Content = data;
         }
     }
 }
