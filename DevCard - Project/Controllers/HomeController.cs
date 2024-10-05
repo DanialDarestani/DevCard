@@ -1,11 +1,19 @@
 using DevCard___Project.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DevCard___Project.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly List<Service> _services = new List<Service>
+        {
+            new (1,"نقره ای"),
+            new (2,"طلایی"),
+            new (3,"پلاتین"),
+            new (4,"الماس")
+        };
         public HomeController()
         {
         }
@@ -17,7 +25,7 @@ namespace DevCard___Project.Controllers
         [HttpGet]
         public IActionResult Contact()
         {
-            var model = new Contact();
+            var model = new Contact {Services = new SelectList(_services,"Id","Name")};
             return View(model);
             /*return PartialView("Contact");*/
         }
@@ -29,9 +37,19 @@ namespace DevCard___Project.Controllers
         //}
 
         [HttpPost]
-        public JsonResult Contact(Contact form)
+        public IActionResult Contact(Contact model)
         {
-            return Json(Ok());
+            model.Services = new SelectList(_services, "Id", "Name");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.error = "اطلاعات وارد شده صحیح نمی باشد. لطفا دوباره تلاش کنید.";
+                return View(model);
+            }
+
+            ModelState.Clear();
+            model = new Contact { Services = new SelectList(_services, "Id", "Name") };
+            ViewBag.success = "نظر شما با موفقیت ثبت شد.";
+            return View(model);
         }
 
 
