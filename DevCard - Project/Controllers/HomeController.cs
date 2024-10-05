@@ -14,13 +14,27 @@ namespace DevCard___Project.Controllers
         {
             return View();
         }
+        [HttpGet]
         public IActionResult Contact()
         {
-            return View();
+            var model = new Contact();
+            return View(model);
             /*return PartialView("Contact");*/
         }
-        
-        
+        //[HttpPost]
+        //public JsonResult Contact(IFormCollection form)
+        //{
+        //    var name = form["name"];
+        //    return Json(Ok());
+        //}
+
+        [HttpPost]
+        public JsonResult Contact(Contact form)
+        {
+            return Json(Ok());
+        }
+
+
         public ViewResult Test1()
         {
             return View("Components/HeaderViewComponents/_Header");
