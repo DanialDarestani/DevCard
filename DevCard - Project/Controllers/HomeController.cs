@@ -1,10 +1,12 @@
 using DevCard___Project.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using DevCard___Project.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DevCard___Project.Controllers
 {
+    //[Route("/home/")]
     public class HomeController : Controller
     {
         private readonly List<Service> _services = new List<Service>
@@ -18,13 +20,24 @@ namespace DevCard___Project.Controllers
         {
         }
 
-        public IActionResult Index()
+        //[Route("index")]
+        public IActionResult Index(int id)
         {
+            Console.WriteLine("Number: " + id);
             return View();
         }
-        [HttpGet]
-        public IActionResult Contact()
+        public IActionResult ProjectDetails(int id)
         {
+            var project = ProjectStore.GetProjectby(id);
+	        return View(project);
+        }
+
+
+        [HttpGet("contact/{n?}/{m?}")]
+        //[HttpGet]
+        public IActionResult Contact(string n,int m)
+        {
+            Console.WriteLine("Name: " + n);
             var model = new Contact {Services = new SelectList(_services,"Id","Name")};
             return View(model);
             /*return PartialView("Contact");*/
