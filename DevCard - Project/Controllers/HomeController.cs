@@ -28,7 +28,7 @@ namespace DevCard___Project.Controllers
         }
         public IActionResult ProjectDetails(int id)
         {
-            var project = ProjectStore.GetProjectby(id);
+            var project = ProjectStore.GetProjectBy(id);
 	        return View(project);
         }
 

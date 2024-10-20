@@ -32,11 +32,11 @@
             <ul class="navbar-nav flex-column text-right">
                 @foreach (var menu in Model.Menus)
                 {
-                <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" asp-controller="@menu.Controller" asp-action="@menu.Action">
                             <i class="fas fa-user fa-fw ml-2"></i>@menu.Name<span class="sr-only">(current)</span>
-                    </a>
-                </li>
+                        </a>
+                    </li>
                 }
             </ul>
         </div>

@@ -15,7 +15,7 @@ namespace DevCard___Project.Data
 			};
 		}
 
-        public static Project GetProjectby(int Id)
+        public static Project GetProjectBy(int Id)
         {
             return GetProjects().FirstOrDefault(x => x.ID == Id);
         }
