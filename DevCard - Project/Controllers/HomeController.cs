@@ -128,14 +128,9 @@ namespace DevCard___Project.Controllers
         }
     }
 
-    public class JavaScriptResult : ContentResult
+    public class JavaScriptResult(string data) : ContentResult
     {
-        public string Content { get; set; }
+        public string Content { get; set; } = data;
         public string ContentType { get; set; } = "application/javascript";
-
-        public JavaScriptResult(string data)
-        {
-            Content = data;
-        }
     }
 }
